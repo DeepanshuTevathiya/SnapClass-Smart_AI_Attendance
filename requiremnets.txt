@@ -14,3 +14,6 @@ segno    # QR codes
 pillow   # import image in sys
 
 streamlit
+
+librosa             # edit voice files(remove noice,...)
+resemblyzer         # make voice embeddings
