@@ -56,18 +56,19 @@ def get_trained_model():                    # train model on student data!
         return None
     
 
-    clf = SVC(kernel="Linear", probability=True, class_weight="balanced")
+    clf = SVC(kernel="linear", probability=True, class_weight="balanced")
     try:
         clf.fit(X,y)
-    except ValueError:
-        pass
+    except ValueError as e:
+        print("Model training error:", e)
+        
     return {'clf':clf, 'X':X, 'y':y}
 
   
 def train_model():                       # train model again when new student added!
     st.cache_resource.clear()
     model_data = get_trained_model()
-    return bool[model_data]
+    return bool(model_data)
 
 
 def predict_attendance(class_image_np):
@@ -88,7 +89,7 @@ def predict_attendance(class_image_np):
 
     for encoding in encodings:
         if len(all_students)>=2:
-            predicted_id = int(clf.predict(encoding)[0])
+            predicted_id = int(clf.predict([encoding])[0])
         else:
             predicted_id =  int(all_students[0])
 
@@ -101,4 +102,4 @@ def predict_attendance(class_image_np):
         if best_match_score <= resemblance_threshold:
             detected_students[predicted_id] =  True
         
-    return detected_students, all_students, len(encoding)
+    return detected_students, all_students, len(encodings)
