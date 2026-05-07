@@ -10,7 +10,7 @@ from src.Database.db import get_all_students, create_student
 
 
 def student_dashboard():
-    st.header("Studeny Dashboard")
+    st.header("Student Dashboard")
 
 def student_screen():
 
@@ -33,7 +33,9 @@ def student_screen():
     st.space()
     st.space()
 
-    show_registration = False
+    if 'show_registration' not in st.session_state:
+        st.session_state['show_registration'] = False
+
     photo_source = st.camera_input("Position your face in center")
 
     if photo_source:
@@ -50,8 +52,8 @@ def student_screen():
                 if  detected:
                     student_id = list(detected.keys())[0]
                     all_students = get_all_students()
-                    student = next((s for s in all_students if s['student_id']==student_id), None)
-
+                    student = next((s for s in all_students if s['student_id']==student_id), None)  
+                                                                #next => find the 1st match(LOGIN STEP)
                     if student:
                         st.session_state.is_logged_in = True
                         st.session_state.user_role = 'Student'
@@ -62,9 +64,9 @@ def student_screen():
                         st.rerun() 
                 else:
                     st.info('face not recog!, You might be a new student')
-                    show_registration = True
+                    st.session_state['show_registration'] = True
 
-    if show_registration:
+    if st.session_state['show_registration']:
         with st.container(border=True):
             st.header('Register new profile')
             new_name = st.text_input("Enter your name", placeholder="e.g. Depanshu Tevathiya")
@@ -91,14 +93,15 @@ def student_screen():
                             if audio_data:
                                 voice_emb = get_voice_embeddings(audio_data.read())
 
-                            response_data = create_student(new_name, face_embedding=face_emb, voice_embedding = voice_emb)
+                            response_data = create_student(new_name, face_embedding=face_emb, voice_embedding=voice_emb)
                             
                             if response_data:
                                 train_model()
-                                st.session_state.pop('registration_in_progress', None)
+                                st.session_state.pop('registration_in_progress', None)  # no duplicate on 2 times clicking create accout 2 times
                                 st.session_state.is_logged_in = True
                                 st.session_state.user_role = 'Student'
                                 st.session_state.student_data = response_data[0]
+                                st.session_state['show_registration'] = False
                                 st.toast(f'Profile created, Hi {new_name}!')
                                 import time 
                                 time.sleep(1)
