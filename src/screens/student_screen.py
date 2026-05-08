@@ -23,7 +23,7 @@ def student_dashboard():
             st.session_state["is_logged_in"] = False
             del st.session_state.student_data
             st.rerun()
-
+    st.space()
     st.space()
     col1, col2 = st.columns(2)
     with col1:
@@ -32,7 +32,7 @@ def student_dashboard():
         if st.button("Enroll in Subjects", type="primary", width="stretch"):
             enroll_subject_dialog()
     
-    st.divider( )
+    st.divider()
 
     with st.spinner("Loading your enrolled Subjects..."):
         subjects = get_student_subject(student_id)
@@ -122,7 +122,7 @@ def student_screen():
                                                                 #next => find the 1st match(LOGIN STEP)
                     if student:
                         st.session_state.is_logged_in = True
-                        st.session_state.user_role = 'Student'
+                        st.session_state.user_role = 'student'
                         st.session_state.student_data = student
                         st.toast(f'Welcome back {student['name']}')
                         import time 
@@ -165,7 +165,7 @@ def student_screen():
                                 train_model()
                                 st.session_state.pop('registration_in_progress', None)  # no duplicate on 2 times clicking create accout 2 times
                                 st.session_state.is_logged_in = True
-                                st.session_state.user_role = 'Student'
+                                st.session_state.user_role = 'student'
                                 st.session_state.student_data = response_data[0]
                                 st.session_state['show_registration'] = False
                                 st.toast(f'Profile created, Hi {new_name}!')
