@@ -18,7 +18,7 @@ def student_dashboard():
     with c1:
         header_dashboard()
     with c2:
-        st.subheader(f"Welcome, {student_data["name"]}")
+        st.subheader(f"Welcome, {student_data['name']}")
         if st.button("Logout", type="secondary", key="loginbckbtn", shortcut="control+backspace"):
             st.session_state["is_logged_in"] = False
             del st.session_state.student_data
@@ -62,7 +62,7 @@ def student_dashboard():
         def unenroll_button():
             if st.button("Click to unenroll", type="tertiary",width="stretch",key=f"unenroll_{sid}", icon=":material/delete_forever:"):
                 unenroll_student_in_subject(sid, student_id)
-                st.toast(f"Unerolled from {sub["subject_code"]} sucessfully")
+                st.toast(f"Unerolled from {sub['subject_code']} sucessfully")
                 st.rerun()
 
         with cols[index % 2]:

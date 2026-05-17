@@ -186,7 +186,7 @@ def teacher_tab_manage_subjects():
             ]
 
             def share_btn():
-                    if st.button(f"Share Code: {sub['subject_name']}", key=f"share_{sub["subject_code"]}", icon=":material/share:"):
+                    if st.button(f"Share Code: {sub['subject_name']}", key=f"share_{sub['subject_code']}", icon=":material/share:"):
                         share_subject_dialog(sub['subject_name'], sub['subject_code'])
                     st.space()
             
