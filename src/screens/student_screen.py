@@ -44,11 +44,11 @@ def student_dashboard():
         sid = log["subject_id"]
 
         if sid not in stats_map:
-            log[sid] = {"total":0, "attended":0}
+            stats_map[sid] = {"total":0, "attended":0}
         
         stats_map[sid]["total"] += 1
 
-        if log.get("is_pesent"):
+        if log.get("is_present"):
             stats_map[sid]["attended"] += 1
     
     cols = st.columns(2)
