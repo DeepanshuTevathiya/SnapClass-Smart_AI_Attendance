@@ -21,7 +21,7 @@ def get_voice_embeddings(audio_bytes):
         return None
 
 def identify_speaker(new_embedding, candidate_dict, threshold=0.65):
-    if not new_embedding or not candidate_dict:
+    if new_embedding is None or not candidate_dict:
         return None, 0.0
     
     best_sid = None
@@ -43,7 +43,7 @@ def process_bulk_audio(audio_bytes, candidate_dict, threshold=0.65):
         encoder = load_voice_encoder()
 
         audio, sr = librosa.load(io.BytesIO(audio_bytes), sr=16000)
-        segments = librosa.effect.split(audio, top_db=30)
+        segments = librosa.effects.split(audio, top_db=30)
 
         identified_results = {}
 
