@@ -42,7 +42,7 @@ def teacher_dashboard():
     st.space()
 
     if "current_teacher_tab" not in st.session_state:
-        st.session_state.current_teacher_tab = "Take Attendance"
+        st.session_state.current_teacher_tab = "take_attendance"
 
     tab1, tab2, tab3 = st.columns(3)
     with tab1:
@@ -217,7 +217,7 @@ def teacher_tab_attendance_records():
         ts = r.get('timestamp')
 
         data.append({
-            "ts_group": ts.split('.')[0] if ts else None,
+            "ts_group": ts.split('.')[0] if ts else None,  #remove mini-sec
             "Time": datetime.fromisoformat(ts).strftime('%Y-%m-%d %I:%M %p') if ts else "N'A",
             "Subjects": r["subjects"]["subject_name"],
             "Subject Code": r["subjects"]["subject_code"],

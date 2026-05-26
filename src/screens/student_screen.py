@@ -163,7 +163,7 @@ def student_screen():
                             
                             if response_data:
                                 train_model()
-                                st.session_state.pop('registration_in_progress', None)  # no duplicate on 2 times clicking create accout 2 times
+                                st.session_state.pop('registration_in_progress', None)  # no duplicate on 2 times clicking create account 2 times
                                 st.session_state.is_logged_in = True
                                 st.session_state.user_role = 'student'
                                 st.session_state.student_data = response_data[0]
