@@ -3,7 +3,7 @@
 An AI-powered attendance system that reduces attendance-taking from **5–10 minutes to just 5–10 seconds**.  
 Click a photo of the class → AI recognizes every student → attendance marked. Done.
 
-> 🎥 **Demo Video** — *(upload your video here)*
+> 🎥 **Demo Video** — *(https://github.com/user-attachments/assets/7416dd80-f2d4-45a1-9b25-c5cf62721cca)*
 
 ---
 
